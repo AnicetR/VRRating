@@ -11,7 +11,7 @@ export default () => {
   useEffect(() => handleLoadMore(), []);
 
   for (let game of gamesList) {
-    output.push(<GameCard key={game.slug} {...game} />);
+    output.push(<GameCard key={game.slug+Date.now()} {...game} />);
   }
 
   return output;
