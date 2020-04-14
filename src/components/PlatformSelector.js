@@ -6,7 +6,9 @@ import {
   SelectControlled,
 } from "react-bulma-components";
 
-class PlatformSelector extends Component {
+
+
+export default class PlatformSelector extends Component {
   state = {};
 
   constructor(props) {
@@ -15,17 +17,15 @@ class PlatformSelector extends Component {
 
   render() {
     return (
-      <Field>
-        <Label>Subject</Label>
-        <Control>
-          <SelectControlled>
-            <option>PC</option>
-            <option>Playstation</option>
-          </SelectControlled>
-        </Control>
-      </Field>
+        <Field>
+          <Label>Subject</Label>
+          <Control>
+            <SelectControlled>
+              <option>PC</option>
+              <option>Playstation</option>
+            </SelectControlled>
+          </Control>
+        </Field>
     );
   }
 }
-
-export default PlatformSelector;

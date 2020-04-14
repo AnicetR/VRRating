@@ -5,8 +5,9 @@ import "./App.css";
 import GameList from "../../components/GameList";
 import PlatformSelector from "../../components/PlatformSelector";
 
-import { Button, Columns, Section, Container } from "react-bulma-components";
+import { Columns, Section, Container } from "react-bulma-components";
 import { GameListProvider } from "../../context";
+import LoadMoreButton from "../../components/LoadMoreButton";
 
 class App extends React.PureComponent {
 
@@ -23,7 +24,7 @@ class App extends React.PureComponent {
               <Columns>
                 <Columns.Column size={9}>
                   <GameList />
-                  <Button>Load more titles</Button>
+                  <LoadMoreButton/>
                 </Columns.Column>
                 <Columns.Column size={3}>
                   {/* <PlatformSelector/> */}

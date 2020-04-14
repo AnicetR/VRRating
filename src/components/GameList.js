@@ -1,10 +1,17 @@
-import React from 'react';
+import React, { useContext, useEffect } from 'react';
 import GameCard from './GameCard'
+import Context from '../context';
 
-export default (props) => {
+export default () => {
+
     let output = [];
 
-    for(let game of props.games){
+    const gamesListContext = useContext(Context);
+    const {gamesList, handleLoadMore} = gamesListContext;
+
+    useEffect(() => handleLoadMore(), []);
+
+    for(let game of gamesList){
         output.push((<GameCard key={game.slug} {...game}/>))
     }
 

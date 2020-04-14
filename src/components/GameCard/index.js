@@ -1,9 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 
 import 'react-bulma-components/dist/react-bulma-components.min.css';
 
 import {Card, Media, Image, Content, Heading} from 'react-bulma-components';
-import Axios from "axios";
 
 export default (props) => {
 
