@@ -1,31 +1,35 @@
-import React, { Component } from "react";
-import {
-  Field,
-  Label,
-  Control,
-  SelectControlled,
-} from "react-bulma-components";
+import React from "react";
+import Context from "../context";
 
+class PlatformSelector extends React.PureComponent {
+    static contextType = Context;
+  constructor(){
+      super();
+      this.handleChange = this.handleChange.bind(this);
 
+  }
+  handleChange(event){
+      this.context.setPlatforms(event.target.value);
+      this.context.reloadGames();
+  }
 
-export default class PlatformSelector extends Component {
-  state = {};
-
-  constructor(props) {
-    super(props);
+  getOptions(){
+      let options = [];
+      for(const platform of this.context.basePlatforms){
+          options.push(<option value={platform} key={platform}>{this.context.basePlatformsDictionnary.get(platform)}</option>)
+      }
+      return options;
   }
 
   render() {
     return (
-        <Field>
-          <Label>Subject</Label>
-          <Control>
-            <SelectControlled>
-              <option>PC</option>
-              <option>Playstation</option>
-            </SelectControlled>
-          </Control>
-        </Field>
+      <div>
+        <select multiple defaultValue={this.context.platforms} onChange={this.handleChange}>
+            {this.getOptions()}
+        </select> 
+      </div>
     );
   }
 }
+
+export default PlatformSelector;

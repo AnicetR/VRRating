@@ -1,19 +1,18 @@
-import React, { useContext, useEffect } from 'react';
-import GameCard from './GameCard'
-import Context from '../context';
+import React, { useContext, useEffect } from "react";
+import GameCard from "./GameCard";
+import Context from "../context";
 
 export default () => {
+  let output = [];
 
-    let output = [];
+  const gamesListContext = useContext(Context);
+  const { gamesList, handleLoadMore } = gamesListContext;
 
-    const gamesListContext = useContext(Context);
-    const {gamesList, handleLoadMore} = gamesListContext;
+  useEffect(() => handleLoadMore(), []);
 
-    useEffect(() => handleLoadMore(), []);
+  for (let game of gamesList) {
+    output.push(<GameCard key={game.slug} {...game} />);
+  }
 
-    for(let game of gamesList){
-        output.push((<GameCard key={game.slug} {...game}/>))
-    }
-
-    return output;
-}
+  return output;
+};

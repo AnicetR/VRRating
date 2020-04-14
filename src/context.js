@@ -1,12 +1,15 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Axios from "axios";
 
 const Context = React.createContext({});
 
 export const GameListProvider = (props) => {
-
   const tagsEndpoint = "https://api.rawg.io/api/games";
   const basePlatforms = [4, 18]; //PC, playstation
+  const basePlatformsDictionnary = new Map();
+  basePlatformsDictionnary.set(4, 'Playstation 4');
+  basePlatformsDictionnary.set(18, 'PC');
+
   const ordering = "-rating";
   const tags = 33; //VR
 
@@ -14,8 +17,8 @@ export const GameListProvider = (props) => {
   const [page, setPage] = useState(1);
   const [platforms, setPlatforms] = useState(basePlatforms);
 
-  const loadsGamesList = () => {
-   Axios({
+  const loadsGamesList = (cb) => {
+    Axios({
       method: "get",
       url: tagsEndpoint,
       params: {
@@ -24,23 +27,40 @@ export const GameListProvider = (props) => {
         tags: tags,
         ordering: ordering,
       },
-    }).then((response) => {
-        setGamesList(gamesList.concat(response.data.results));
-        setPage(page+1);
-    })
+    }).then(cb);
   };
 
-  const handleLoadMore = () => loadsGamesList();
+  const loadMoreGames = () => {
+    loadsGamesList((response) => {
+      setGamesList(gamesList.concat(response.data.results));
+      setPage(page + 1);
+    })
+  }
+
+  const reloadGames = () => {
+    loadsGamesList((response) => {
+      setGamesList(response.data.results);
+      setPage(2);
+    })
+  }
+
+  const handleLoadMore = () => loadMoreGames();
 
   return (
-      <Context.Provider
-        value={{
-            gamesList,
-            handleLoadMore
-        }}>
-            {props.children}
-        </Context.Provider>
-  )
+    <Context.Provider
+      value={{
+        gamesList,
+        handleLoadMore,
+        platforms,
+        setPlatforms,
+        basePlatforms,
+        reloadGames,
+        basePlatformsDictionnary
+      }}
+    >
+      {props.children}
+    </Context.Provider>
+  );
 };
 export const GameListConsumer = Context.Consumer;
 

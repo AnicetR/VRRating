@@ -1,19 +1,16 @@
-import React, { useEffect } from "react";
+import React from "react";
 
 import "./App.css";
 
 import GameList from "../../components/GameList";
-import PlatformSelector from "../../components/PlatformSelector";
 
 import { Columns, Section, Container } from "react-bulma-components";
 import { GameListProvider } from "../../context";
 import LoadMoreButton from "../../components/LoadMoreButton";
+import PlatformSelector from "../../components/PlatformSelector";
 
 class App extends React.PureComponent {
-
-  componentDidMount() {
-    
-  }
+  componentDidMount() {}
 
   render() {
     return (
@@ -24,10 +21,10 @@ class App extends React.PureComponent {
               <Columns>
                 <Columns.Column size={9}>
                   <GameList />
-                  <LoadMoreButton/>
+                  <LoadMoreButton />
                 </Columns.Column>
                 <Columns.Column size={3}>
-                  {/* <PlatformSelector/> */}
+                  <PlatformSelector />
                 </Columns.Column>
               </Columns>
             </Container>
