@@ -4,7 +4,7 @@ import './App.css';
 import GameCard from '../../components/GameCard';
 import Axios from 'axios';
 import GameList from '../../components/GameList';
-import {Button} from 'react-bulma-components';
+import {Button, Columns, Section, Container} from 'react-bulma-components';
 
 class App extends React.PureComponent{
   tagsEndpoint = 'https://api.rawg.io/api/games';
@@ -55,10 +55,19 @@ class App extends React.PureComponent{
   render() {
     return (
       <div>
-        <div id="list">
-          <GameList games={this.state.gamesList} />
-          <Button onClick={this.loadMore}>Load more titles</Button>
-        </div>
+        <Section>
+          <Container>
+            <Columns>
+              <Columns.Column size={9}>
+              <GameList games={this.state.gamesList} />
+                <Button onClick={this.loadMore}>Load more titles</Button>
+              </Columns.Column>
+              <Columns.Column size={3}>
+                <p className="bd-notification is-light">size-3</p>
+              </Columns.Column>
+            </Columns>
+          </Container>
+        </Section>
       </div>
     );
   }
